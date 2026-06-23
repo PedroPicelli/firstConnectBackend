@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Models.Dtos.Create;
 using Models.Dtos.Response;
+using Models.Dtos.Login;
 using Services;
 
 namespace Controllers;
@@ -52,13 +53,35 @@ public class AuthController : ControllerBase {
 
 
 
+    [HttpPost("login")]
+    async public Task<IActionResult> LoginAccount([FromBody] LoginAccountDto loginDto) {
+        
+        var user = await _authService.LoginUserAsync(loginDto);
+
+        if(user == null) {
+            return Unauthorized();
+        }
+
+
+        var userResponse = new AuthResponseDto {
+
+            Id = user.Id,
+            Email = user.Email,
+            Username = user.Username,
+            DisplayName = user.DisplayName
+
+        };
+
+        return Ok(userResponse);
+    }
+
     [HttpPost("register")]
     async public Task<IActionResult> CreateAccount([FromBody] CreateAccountDto createDto) {
         
         var user = await _authService.CreateUserAsync(createDto);
 
         if(user == null) {
-            return BadRequest(new {
+            return Conflict(new {
                 message = "Email or username already in use."
             });
         }

@@ -13,13 +13,13 @@ public class CreateAccountDto {
 
 
     [Required]
-    [MinLength(2)]
+    [MinLength(3)]
     [MaxLength(32)]
     public string DisplayName { get; set; } = string.Empty;
 
 
     [Required]
-    [MinLength(3)]
+    [MinLength(5)]
     [MaxLength(32)]
     [RegularExpression(
         @"^[a-z0-9._]+$",

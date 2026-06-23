@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Models.Database;
 using Models.Dtos.Create;
+using Models.Dtos.Login;
 
 namespace Services;
 
@@ -14,6 +15,27 @@ public class AuthService {
         _db = db;
     }
 
+
+    async public Task<User?> LoginUserAsync(LoginAccountDto loginDto) {
+        User? user = null;
+
+        if(loginDto.loginIdentifierType == LoginIdentifierType.Email) {
+            user = await _db.Users.FirstOrDefaultAsync(user => user.Email == loginDto.loginIdentifier);
+
+        } else if(loginDto.loginIdentifierType == LoginIdentifierType.Username) {
+            user = await _db.Users.FirstOrDefaultAsync(user => user.Username == loginDto.loginIdentifier);
+
+        }
+
+        if(user != null) {
+            if(!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.PasswordHash)) {
+                user = null;
+            }
+        }
+
+        return user;
+
+    }
     
     async public Task<User?> CreateUserAsync(CreateAccountDto createDto) {
         

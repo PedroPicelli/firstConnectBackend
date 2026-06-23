@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {
       "BCrypt.Net-Next/4.2.0": {
@@ -2809,19 +2809,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pedro Picelli\\.nuget\\packages\\": {}
+    "C:\\Users\\Administrador\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pedro Picelli\\Documents\\FirstConnect\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\Administrador\\Documents\\firstConnect\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\Pedro Picelli\\Documents\\FirstConnect\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\Pedro Picelli\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pedro Picelli\\Documents\\FirstConnect\\backend\\obj\\",
+      "projectPath": "C:\\Users\\Administrador\\Documents\\firstConnect\\backend\\backend.csproj",
+      "packagesPath": "C:\\Users\\Administrador\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Administrador\\Documents\\firstConnect\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Pedro Picelli\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Administrador\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -2831,6 +2831,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {}
         }
@@ -2845,10 +2846,11 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "BCrypt.Net-Next": {
@@ -2901,7 +2903,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
