@@ -10,11 +10,13 @@ namespace Controllers;
 [Route("auth")]
 public class AuthController : ControllerBase {
     private readonly AuthService _authService;
+    private readonly TokenService _tokenService;
 
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, TokenService tokenService) {
         
         _authService = authService;
+        _tokenService = tokenService;
 
     }
 
@@ -72,7 +74,16 @@ public class AuthController : ControllerBase {
 
         };
 
-        return Ok(userResponse);
+
+        // Creating Token
+
+        var token = _tokenService.GenerateToken(user);
+
+
+        return Ok(new {
+            token,
+            user = userResponse
+        });
     }
 
     [HttpPost("register")]
