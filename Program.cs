@@ -104,6 +104,7 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<PostService>();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

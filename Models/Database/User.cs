@@ -23,16 +23,27 @@ public class User {
     [MaxLength(32)]
     public string Username { get; set; } = string.Empty;
 
+    [Required]
+    [MaxLength(150)]
+    public string Bio { get; set; } = string.Empty;
+
+
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
+    public ICollection<Post> Posts { get; set; } = new List<Post>();
+
+    public ICollection<PostLike> PostLikes { get; set; } = new List<PostLike>();
+
 
     [Required]
     [MaxLength(255)]
     public string PasswordHash { get; set; } = string.Empty;
 
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTimeOffset CreatedAt { get; set; } = DateTime.UtcNow;
 
 
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
 }
 
 
