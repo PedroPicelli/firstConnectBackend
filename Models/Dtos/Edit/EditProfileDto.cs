@@ -11,7 +11,6 @@ public class EditProfileDto {
     [MaxLength(32)]
     public string DisplayName { get; set; } = string.Empty;
 
-    [Required]
     [MaxLength(150)]
     public string Bio { get; set; } = string.Empty;
 

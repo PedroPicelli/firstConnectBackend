@@ -10,11 +10,12 @@ namespace Controllers;
 [Route("auth")]
 public class AuthController : ControllerBase {
     private readonly AuthService _authService;
+    private readonly UserService _userService;
     private readonly TokenService _tokenService;
 
 
-    public AuthController(AuthService authService, TokenService tokenService) {
-        
+    public AuthController(UserService userService, AuthService authService, TokenService tokenService) {
+        _userService = userService;
         _authService = authService;
         _tokenService = tokenService;
 
@@ -63,17 +64,7 @@ public class AuthController : ControllerBase {
         if(user == null) {
             return Unauthorized();
         }
-
-
-        var userResponse = new AuthResponseDto {
-
-            Id = user.Id,
-            Email = user.Email,
-            Username = user.Username,
-            DisplayName = user.DisplayName
-
-        };
-
+        
 
         // Creating Token
 
@@ -82,7 +73,7 @@ public class AuthController : ControllerBase {
 
         return Ok(new {
             token,
-            user = userResponse
+            user = _userService.getUserResponseDto(await _userService.GetFullUserAsync(user.Id))
         });
     }
 

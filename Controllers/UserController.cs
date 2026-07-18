@@ -35,9 +35,9 @@ public class UserController : ControllerBase {
         }
         
         try {
-            var user = await _userService.GetUserAsync(int.Parse(userId));
+            var user = await _userService.GetFullUserAsync(int.Parse(userId));
 
-            return Ok(getUserResponseDto(user));
+            return Ok(_userService.getUserResponseDto(user));
 
         } catch(KeyNotFoundException) {
             return NotFound();
@@ -64,7 +64,7 @@ public class UserController : ControllerBase {
 
             return Ok(new {
                 Token = token,
-                User = getUserResponseDto(user)
+                User = _userService.getUserResponseDto(await _userService.GetFullUserAsync(int.Parse(userId)))
             });
 
         } catch(KeyNotFoundException) {
@@ -73,51 +73,6 @@ public class UserController : ControllerBase {
 
         }
 
-    }
-
-
-
-    public UserResponseDto getUserResponseDto(User user) {
-        var userResponse = new UserResponseDto {
-            Id = user.Id,
-            Email = user.Email,
-            DisplayName = user.DisplayName,
-            Username = user.Username,
-            Bio = user.Bio,
-            Posts = user.Posts
-                .OrderByDescending(c => c.CreatedAt) 
-                .Select(p => new PostResponseDto {
-                    Id = p.Id,
-                    Content = p.Content,
-                    CreatedAt = p.CreatedAt,
-                    UpdatedAt = p.UpdatedAt,
-                    UserId = p.UserId,
-                    IsLikedByMe = p.Likes.Any(pl => p.UserId == pl.UserId),
-                    LikesCount = p.Likes.Count(),
-                    
-                    Comments = p.Comments
-                        .OrderByDescending(c => c.CreatedAt) 
-                        .Select(c => new CommentResponseDto {
-                            Id = c.Id,
-                            Content = c.Content,
-                            CreatedAt = c.CreatedAt,
-                            UpdatedAt = c.UpdatedAt,
-                            PostId = c.PostId,
-                            UserId = c.UserId,
-                            Username = c.User.Username,
-                            DisplayName = c.User.DisplayName
-                        })
-                        .ToList(),
-                    Username = p.User.Username,
-                    DisplayName = p.User.DisplayName
-                })
-                .ToList(),
-
-            LikesCount = user.PostLikes.Count
-
-        };
-
-        return userResponse;
     }
 
 
